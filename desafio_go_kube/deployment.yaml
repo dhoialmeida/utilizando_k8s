@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: desafio-go-kube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: desafio-go-kube
+  template:
+    metadata:
+      labels:
+        app: desafio-go-kube
+    spec:
+      containers:
+        - name: desafio-go-kube
+          image: gcr.io/kubernetes-270817/desafio-go-kube
+          ports:
+            - containerPort: 8000
