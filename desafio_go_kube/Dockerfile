@@ -5,7 +5,8 @@ FROM golang:1.13.8-alpine3.11 as builder
 ADD ./src /workspace
 WORKDIR /workspace
 # -ldflags "-w" remove informações de debug do executável
-RUN go build -ldflags "-w" main.go
+# -extldflags "-static" garante que o executável seja linkado estáticamente
+RUN CGO_ENABLED=0 go build -ldflags '-w -extldflags "-static"' main.go
 
 # Segunda etapa
 # Cria uma imagem mínima copiando o executável gerado na primeira etapa
